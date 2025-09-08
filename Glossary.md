@@ -1,1 +1,1 @@
-List of Definitons and 
+List of Definitons and Terms of commands
