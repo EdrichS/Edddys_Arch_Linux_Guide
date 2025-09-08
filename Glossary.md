@@ -1,6 +1,6 @@
-<font size = "7"> List of Definitons and Terms of commands </font>
+# List of Definitons and Terms of commands
 
-iwctl – interactive Wi-Fi control tool (from iwd).
+##iwctl## – interactive Wi-Fi control tool (from iwd).
 
 device list – list Wi-Fi devices (e.g., wlan0)
 
