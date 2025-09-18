@@ -1,133 +1,147 @@
 # List of Definitons and Terms of commands
 
-##iwctl## – interactive Wi-Fi control tool (from iwd).
+## **arch-chroot /mnt**
+- change root into installed system.
 
-device list – list Wi-Fi devices (e.g., wlan0)
+## **auditd**
+- Linux audit daemon (service name).
 
-station wlan0 scan – scan for networks
+## **blkid /dev/...**
+- show block device IDs (UUID/PARTUUID).  
+- **PARTUUID**: the partition’s GUID; stable across reformat.
 
-station wlan0 get-networks – show discovered SSIDs
+## **bluedevil**
+- KDE Bluetooth integration.
 
-station wlan0 connect "SSID" – connect to a network
+## **bootctl install**
+- install systemd-boot into EFI.
 
-ping -c 3 host – send 3 ICMP echo requests to test reachability.
+## **cat FileName**
+- print file contents to stdout.
 
-1.1.1.1 tests raw connectivity; archlinux.org tests DNS.
+## **clamscan -r PATH**
+- recursive scan.
 
-timedatectl set-ntp true – enable NTP time sync.
+## **device list**
+- list Wi-Fi devices (e.g., wlan0).
 
-fdisk /dev/nvme0n1 – partition disk (interactive).
+## **echo Text | tee FILE**
+- write TEXT to FILE (with sudo).
 
-g create GPT, n new partition, t type, w write.
+## **fdisk /dev/nvme0n1**
+- partition disk (interactive).  
+- **g** create GPT, **n** new partition, **t** type, **w** write.
 
-mkfs.fat -F32 /dev/nvme0n1p1 – make FAT32 filesystem (EFI).
+## **freshclam**
+- update ClamAV virus definitions.
 
--F32 → FAT32
-    -FAT32 is a widely compatible storage format used on storage devices like USB drives, memory cards, etc.
+## **genfstab -U /mnt >> /mnt/etc/fstab**
+- generate fstab using UUIDs and append.
 
-mkfs.ext4 /dev/nvme0n1p2 – make ext4 filesystem for root.
+## **hwclock --systohc**
+- write system time to hardware clock.
 
-mkswap /dev/... / swapon – create/enable swap (optional).
+## **iwctl**
+- interactive Wi-Fi control tool (from iwd).
 
-mount SRC DST – mount filesystem at directory.
-mkdir -p /mnt/boot – create directory (with parents).
-umount -R /mnt – unmount recursively (all submounts).
+## **ln -sf A B**
+- create/update symlink; -s symbolic, -f force.
 
-pacstrap -K /mnt pkg… – install packages into /mnt.
+## **locale-gen**
+- generate locales per /etc/locale.gen.
 
--K – copy host’s pacman keyring.
+## **mkfs.ext4 /dev/nvme0n1p2**
+- make ext4 filesystem for root.
 
-genfstab -U /mnt >> /mnt/etc/fstab – generate fstab using UUIDs and append.
+## **mkfs.fat -F32 /dev/nvme0n1p1**
+- make FAT32 filesystem (EFI).  
+- -F32 == FAT32  
+- **FAT32** is a widely compatible storage format used on storage devices like USB drives, memory cards, etc.
 
-arch-chroot /mnt – change root into installed system.
+## **mkdir -p /mnt/boot**
+- create directory (with parents).
 
-ln -sf A B – create/update symlink; -s symbolic, -f force.
+## **mount SRC DST**
+- mount filesystem at directory.
 
-hwclock --systohc – write system time to hardware clock.
+## **nano FILE**
+- simple terminal editor.  
+- **Save** = Ctrl+O then Enter
+- **Exit** = Ctrl+X.
 
-locale-gen – generate locales per /etc/locale.gen.
+## **pacman**
+- Arch package manager.  
+  - **-S** = sync/install packages from repos  
+  - **-Sy** = refresh package databases  
+  - **-Syu** = refresh + upgrade all packages  
+  - **-Syyu** = force double refresh + upgrade (use if mirrors break)  
+  - **-Rns** = remove package + dependencies + configs  
+  - **-Qs** = search installed packages  
+  - **-Ss** = search in repos
 
-bootctl install – install systemd-boot into EFI.
+## **pacstrap -K /mnt pkg…**
+- install packages into /mnt.  
+- **-K** = copy host’s pacman keyring.
 
-blkid /dev/... – show block device IDs (UUID/PARTUUID).
+## **passwd**
+- set a password.
 
-PARTUUID – the partition’s GUID; stable across reformat.
+## **ping -c 3 archlinux.org**
+- **ping** = sends ICMP echo requests to test reachability and connection.
+- **-c 3** = c means count , 3 sends exactly 3 pings; without -c, ping will keep running until manually stopped  
+- **archlinux.org** is the target host we're pinging.
 
-nano FILE – simple terminal editor.
+## **pipewire, wireplumber**
+- modern audio server + session manager.
 
-Save: Ctrl+O, Enter; Exit: Ctrl+X.
+## **reflector … --save /etc/pacman.d/mirrorlist**
+- write a refreshed mirrorlist.
 
-pacman – Arch package manager.
+## **rkhunter --check**
+- scan for rootkits.
 
--S – sync/install packages from repos
+## **sddm**
+- display manager (login screen) for KDE.  
+- Enable with **systemctl enable --now sddm**.
 
--Sy – refresh package databases
+## **station wlan0 connect "SSID"**
+- connect to a network.
 
--Syu – refresh + upgrade all packages
+## **station wlan0 get-networks**
+- show discovered SSIDs.
 
--Syyu – force double refresh + upgrade (use if mirrors break)
+## **station wlan0 scan**
+- scan for networks.
 
--Rns – remove package + dependencies + configs
+## **sudo**
+- run a single command with root privileges.  
+- Uses **/etc/sudoers** (edit with visudo).
 
--Qs – search installed packages
+## **systemctl**
+- manage services (systemd).  
+  - **enable** = start at boot  
+  - **start** = start now  
+  - **enable --now** = both (only on a real booted system, not chroot)  
+  - **disable --now** = stop and disable  
+  - **status NAME** = show service status
 
--Ss – search in repos
+## **timedatectl set-ntp true**
+- enable NTP time sync.
 
-sudo – run a single command with root privileges.
+## **ufw**
+- uncomplicated firewall.  
+  - **enable** = turn firewall on  
+  - **status verbose** = show rules & state  
+  - **default deny incoming** = block unsolicited inbound  
+  - **default allow outgoing** = allow outbound
 
-Uses /etc/sudoers (edit with visudo).
+## **umount -R /mnt**
+- unmount recursively (all submounts).
 
-useradd -m -G wheel -s /bin/bash NAME – create user.
-
--m make home dir, -G groups, -s shell.
-
-passwd – set a password.
-
-visudo – safely edit sudoers file.
-
-Enable: %wheel ALL=(ALL) ALL.
-
-systemctl – manage services (systemd).
-
-enable – start at boot
-
-start – start now
-
-enable --now – both (only on a real booted system, not chroot)
-
-disable --now – stop and disable
-
-status NAME – show service status
-
-ufw – uncomplicated firewall.
-
-enable – turn firewall on
-
-status verbose – show rules & state
-
-default deny incoming – block unsolicited inbound
-
-default allow outgoing – allow outbound
-
-auditd – Linux audit daemon (service name).
-rkhunter --check – scan for rootkits.
-freshclam – update ClamAV virus definitions.
-clamscan -r PATH – recursive scan.
-
-reflector … --save /etc/pacman.d/mirrorlist – write a refreshed mirrorlist.
-
-sddm – display manager (login screen) for KDE.
-
-Enable with systemctl enable --now sddm.
-
-pipewire, wireplumber – modern audio server + session manager.
-bluedevil – KDE Bluetooth integration.
-
-cat FileName – print file contents to stdout.
-echo Text | tee FILE – write TEXT to FILE (with sudo).
-
-Kitty config - ~/.config/kitty/kitty.conf
-
-background_opacity 0.85 - transparency
-
-background - background color
+## **useradd -m -G wheel -s /bin/bash NAME**
+- **useradd** = creates new user  
+- **-m** = makes the newly made user a home directory
+- **-G wheel** = adds the newly made user to the wheel group
+- **-s** = sets the newly made user's login shell 
+- **/bin/bash** = specifies that the newly made user uses bash when logging in
+- **NAME** = the name of the newly made user. This can be changed to whatever you want
